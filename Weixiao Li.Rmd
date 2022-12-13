@@ -9,22 +9,139 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+library(readr)
+library(ggplot2)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+```{r}
+checkpoints <- read_csv("20221114/checkpoints.txt")
+directions <- read_csv("20221114/directions.txt")
+facilities_properties <- read_csv("20221114/facilities_properties.txt")
+facilities_properties_definitions<-read_csv("20221114/facilities_properties_definitions.txt")
+multi_route_trips <- read_csv("20221114/multi_route_trips.txt")
+pathways <- read_csv("20221114/pathways.txt")
+routes <- read_csv("20221114/routes.txt")
+route_patterns <- read_csv("20221114/route_patterns.txt")
+shapes <- read_csv("20221114/shapes.txt")
+stops <- read_csv("20221114/stops.txt")
+trips <- read_csv("20221114/trips.txt")
+feed_info <- read_csv("20221114/feed_info.txt")
+transfers <-read_csv("20221114/transfers.txt")
+stop_times <- read_csv("20221114/stop_times.txt")
 
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# The earliest train on the Orange Line, arriving at each station
+```{r}
+Travel <- read.csv("D:/360Downloads/Travel_Times_2021/HRTravelTimesQ4_21.csv")
+```
+
+```{r}
+Travel <- dplyr::filter(Travel,service_date==	"2021-11-14"|service_date==	"2021-11-15"|service_date==	"2021-11-16"|service_date==	"2021-11-17"|service_date==	"2021-11-18"|service_date==	"2021-11-19"|service_date==	"2021-11-20"|service_date==
+"2021-11-21")
+nTravel <- dplyr::filter(Travel,route_id=="Orange")
+```
+
+```{r}
+m <- dplyr::filter(nTravel,service_date=="2021-11-15")
+m1 <- dplyr::filter(m,direction_id==0)
+m2<- dplyr::filter(m1,to_stop_id==min(m1$to_stop_id))
+m3 <- dplyr::filter(m2,end_time_sec==min(m2$end_time_sec))
+m4<-dplyr::arrange(m3,travel_time_sec)
+```
+
+```{r}
+m4$diff <- for(i in range(len))
+```
+
+
+
+#2 The earliest train on the Orange Line that runs the full distance
+```{r}
+f15 <- max(m4$travel_time_sec)
+
+m14 <- dplyr::filter(nTravel,service_date=="2021-11-14")
+m14_1 <- dplyr::filter(m14,direction_id==0)
+m14_2<- dplyr::filter(m14_1,to_stop_id==min(m14_1$to_stop_id))
+m14_3 <- dplyr::filter(m14_2,end_time_sec==min(m14_2$end_time_sec))
+m14_4<-dplyr::arrange(m14_3,travel_time_sec)
+f14 <- max(m14_4$travel_time_sec)
+```
+
+
+```{r}
+m16 <- dplyr::filter(nTravel,service_date=="2021-11-16")
+m16_1 <- dplyr::filter(m16,direction_id==0)
+m16_2<- dplyr::filter(m16_1,to_stop_id==min(m16_1$to_stop_id))
+m16_3 <- dplyr::filter(m16_2,end_time_sec==min(m16_2$end_time_sec))
+m16_4<-dplyr::arrange(m16_3,travel_time_sec)
+f16 <- max(m16_4$travel_time_sec)
+
+m17 <- dplyr::filter(nTravel,service_date=="2021-11-17")
+m17_1 <- dplyr::filter(m17,direction_id==0)
+m17_2<- dplyr::filter(m17_1,to_stop_id==min(m17_1$to_stop_id))
+m17_3 <- dplyr::filter(m17_2,end_time_sec==min(m17_2$end_time_sec))
+m17_4<-dplyr::arrange(m17_3,travel_time_sec)
+f17 <- max(m17_4$travel_time_sec)
+
+m18 <- dplyr::filter(nTravel,service_date=="2021-11-18")
+m18_1 <- dplyr::filter(m18,direction_id==0)
+m18_2<- dplyr::filter(m18_1,to_stop_id==min(m18_1$to_stop_id))
+m18_3 <- dplyr::filter(m18_2,end_time_sec==min(m18_2$end_time_sec))
+m18_4<-dplyr::arrange(m18_3,travel_time_sec)
+f18 <- max(m18_4$travel_time_sec)
+
+m19 <- dplyr::filter(nTravel,service_date=="2021-11-19")
+m19_1 <- dplyr::filter(m19,direction_id==0)
+m19_2<- dplyr::filter(m19_1,to_stop_id==min(m19_1$to_stop_id))
+m19_3 <- dplyr::filter(m19_2,end_time_sec==min(m19_2$end_time_sec))
+m19_4<-dplyr::arrange(m19_3,travel_time_sec)
+f19 <- max(m19_4$travel_time_sec)
+
+m20 <- dplyr::filter(nTravel,service_date=="2021-11-20")
+m20_1 <- dplyr::filter(m20,direction_id==0)
+m20_2<- dplyr::filter(m20_1,to_stop_id==min(m20_1$to_stop_id))
+m20_3 <- dplyr::filter(m20_2,end_time_sec==min(m20_2$end_time_sec))
+m20_4<-dplyr::arrange(m20_3,travel_time_sec)
+f20 <- max(m20_4$travel_time_sec)
+
+m21 <- dplyr::filter(nTravel,service_date=="2021-11-21")
+m21_1 <- dplyr::filter(m21,direction_id==0)
+m21_2<- dplyr::filter(m21_1,to_stop_id==min(m21_1$to_stop_id))
+m21_3 <- dplyr::filter(m21_2,end_time_sec==min(m21_2$end_time_sec))
+m21_4<-dplyr::arrange(m21_3,travel_time_sec)
+f21 <- max(m21_4$travel_time_sec)
+```
+
+```{r}
+total_time <- c(f15,f16,f17,f18,f19,f20,f21)
+date <- c("11-15","11-16","11-17","11-18","11-19","11-20","11-21")
+df_2 <- data.frame(x = date, y = total_time)
+ggplot(data = df_2, aes(x = date, y = total_time )) + geom_line(aes(x,y,group=1),col="lightblue")+geom_point(aes(x,y),col="purple")
+
+```
+
+
+
+
+
+#3 Mean of total time that runs the full distance
+
+```{r}
+t <- dplyr::filter(nTravel,from_stop_id==min(nTravel$from_stop_id)& to_stop_id==max(nTravel$to_stop_id))
+t15 <- dplyr::filter(t,service_date=="2021-11-15")
+t16 <- dplyr::filter(t,service_date=="2021-11-16")
+t17 <- dplyr::filter(t,service_date=="2021-11-17")
+t18 <- dplyr::filter(t,service_date=="2021-11-18")
+t19 <- dplyr::filter(t,service_date=="2021-11-19")
+t20 <- dplyr::filter(t,service_date=="2021-11-20")
+t21 <- dplyr::filter(t,service_date=="2021-11-21")
+travel_time <- c(mean(t15$travel_time_sec),mean(t16$travel_time_sec),mean(t17$travel_time_sec),mean(t18$travel_time_sec),mean(t19$travel_time_sec),mean(t20$travel_time_sec),mean(t21$travel_time_sec))
+date <- c("11-15","11-16","11-17","11-18","11-19","11-20","11-21")
+df_1 <- data.frame(x = date, y = travel_time)
+ggplot(data = df_1, mapping = aes(x = travel_time, y = date)) + geom_bar(stat="identity",fill="lightblue")+ggtitle("From 70001 to 70279")
+```
+
