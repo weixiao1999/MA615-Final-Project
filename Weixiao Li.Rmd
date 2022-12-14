@@ -220,7 +220,7 @@ di21 <- diff(d21_4$travel_time_sec)
 
 #3
 ```{r}
-t_dec <- dplyr::filter(nTravel_dec,from_stop_id==min(nTravel$from_stop_id)& to_stop_id==max(nTravel$to_stop_id))
+t_dec <- dplyr::filter(nTravel_dec,from_stop_id==min(nTravel_dec$from_stop_id)& to_stop_id==max(nTravel_dec$to_stop_id))
 t15_dec <- dplyr::filter(t_dec,service_date=="2021-12-15")
 t16_dec <- dplyr::filter(t_dec,service_date=="2021-12-16")
 t17_dec <- dplyr::filter(t_dec,service_date=="2021-12-17")
@@ -232,5 +232,274 @@ travel_time_dec <- c(mean(t15_dec$travel_time_sec),mean(t16_dec$travel_time_sec)
 Dec <- c("12-15","12-16","12-17","12-18","12-19","12-20","12-21")
 df_1_dec <- data.frame(x = Dec, y = travel_time_dec)
 ggplot(data = df_1_dec, mapping = aes(x = travel_time_dec, y = Dec)) + geom_bar(stat="identity",fill="lightblue")+ggtitle("From Start to Finish")
+```
+
+# January
+```{r}
+TRAVEL2022 <- read.csv("D:/360Downloads/TravelTimes_2022/TravelTimes_2022/2022-Q1_HRTravelTimes.csv")
+Travel_jan <- dplyr::filter(TRAVEL2022 ,service_date==	"2022-01-15"|service_date==	"2022-01-16"|service_date==	"2022-01-17"|service_date==	"2022-01-18"|service_date==	"2022-01-19"|service_date==	"2022-01-20"|service_date==
+"2022-01-21")
+nTravel_jan <- dplyr::filter(Travel_jan,route_id=="Orange")
+```
+
+#1
+```{r}
+j15 <- dplyr::filter(nTravel_jan,service_date=="2022-01-15")
+j15_1 <- dplyr::filter(j15,direction_id==0)
+j15_2<- dplyr::filter(j15_1,to_stop_id==min(j15_1$to_stop_id))
+j15_3 <- dplyr::filter(j15_2,end_time_sec==min(j15_2$end_time_sec))
+j15_4<-dplyr::arrange(j15_3,travel_time_sec)
+j15 <- max(j15_4$travel_time_sec)
+
+j16 <- dplyr::filter(nTravel_jan,service_date=="2022-01-16")
+j16_1 <- dplyr::filter(j16,direction_id==0)
+j16_2<- dplyr::filter(j16_1,to_stop_id==min(j16_1$to_stop_id))
+j16_3 <- dplyr::filter(j16_2,end_time_sec==min(j16_2$end_time_sec))
+j16_4<-dplyr::arrange(j16_3,travel_time_sec)
+j16 <- max(j16_4$travel_time_sec)
+
+j17 <- dplyr::filter(nTravel_jan,service_date=="2022-01-17")
+j17_1 <- dplyr::filter(j17,direction_id==0)
+j17_2<- dplyr::filter(j17_1,to_stop_id==min(j17_1$to_stop_id))
+j17_3 <- dplyr::filter(j17_2,end_time_sec==min(j17_2$end_time_sec))
+j17_4<-dplyr::arrange(j17_3,travel_time_sec)
+j17 <- max(j17_4$travel_time_sec)
+
+j18 <- dplyr::filter(nTravel_jan,service_date=="2022-01-18")
+j18_1 <- dplyr::filter(j18,direction_id==0)
+j18_2<- dplyr::filter(j18_1,to_stop_id==min(j18_1$to_stop_id))
+j18_3 <- dplyr::filter(j18_2,end_time_sec==min(j18_2$end_time_sec))
+j18_4<-dplyr::arrange(j18_3,travel_time_sec)
+j18 <- max(j18_4$travel_time_sec)
+
+j19 <- dplyr::filter(nTravel_jan,service_date=="2022-01-19")
+j19_1 <- dplyr::filter(j19,direction_id==0)
+j19_2<- dplyr::filter(j19_1,to_stop_id==min(j19_1$to_stop_id))
+j19_3 <- dplyr::filter(j19_2,end_time_sec==min(j19_2$end_time_sec))
+j19_4<-dplyr::arrange(j19_3,travel_time_sec)
+j19 <- max(j19_4$travel_time_sec)
+
+j20 <- dplyr::filter(nTravel_jan,service_date=="2022-01-20")
+j20_1 <- dplyr::filter(j20,direction_id==0)
+j20_2<- dplyr::filter(j20_1,to_stop_id==min(j20_1$to_stop_id))
+j20_3 <- dplyr::filter(j20_2,end_time_sec==min(j20_2$end_time_sec))
+j20_4<-dplyr::arrange(j20_3,travel_time_sec)
+j20 <- max(j20_4$travel_time_sec)
+
+j21 <- dplyr::filter(nTravel_jan,service_date=="2022-01-21")
+j21_1 <- dplyr::filter(j21,direction_id==0)
+j21_2<- dplyr::filter(j21_1,to_stop_id==min(j21_1$to_stop_id))
+j21_3 <- dplyr::filter(j21_2,end_time_sec==min(j21_2$end_time_sec))
+j21_4<-dplyr::arrange(j21_3,travel_time_sec)
+j21 <- max(j21_4$travel_time_sec)
+```
+
+```{r}
+total_time_jan<- c(j15,j16,j17,j18,j19,j20,j21)
+Jan <- c("1-15","1-16","1-17","1-18","1-19","1-20","1-21")
+df_2_jan <- data.frame(x = Jan, y = total_time_jan)
+ggplot(data = df_2_jan, aes(x = Jan, y = total_time_jan )) + geom_line(aes(x,y,group=1),col="lightblue")+geom_point(aes(x,y),col="purple")
+```
+
+#2
+```{r}
+di15_jan <- diff(j15_4$travel_time_sec)
+di16_jan <- diff(j16_4$travel_time_sec)
+di17_jan <- diff(j17_4$travel_time_sec)
+di18_jan <- diff(j18_4$travel_time_sec)
+di19_jan <- diff(j19_4$travel_time_sec)
+di20_jan <- diff(j20_4$travel_time_sec)
+di21_jan <- diff(j21_4$travel_time_sec)
+```
+
+#3
+```{r}
+t_jan <- dplyr::filter(nTravel_jan,from_stop_id==min(nTravel_jan$from_stop_id)& to_stop_id==max(nTravel_jan$to_stop_id))
+t15_jan <- dplyr::filter(t_jan,service_date=="2022-01-15")
+t16_jan <- dplyr::filter(t_jan,service_date=="2022-01-16")
+t17_jan <- dplyr::filter(t_jan,service_date=="2022-01-17")
+t18_jan <- dplyr::filter(t_jan,service_date=="2022-01-18")
+t19_jan <- dplyr::filter(t_jan,service_date=="2022-01-19")
+t20_jan<- dplyr::filter(t_jan,service_date=="2022-01-20")
+t21_jan<- dplyr::filter(t_jan,service_date=="2022-01-21")
+travel_time_jan <- c(mean(t15_jan$travel_time_sec),mean(t16_jan$travel_time_sec),mean(t17_jan$travel_time_sec),mean(t18_jan$travel_time_sec),mean(t19_jan$travel_time_sec),mean(t20_jan$travel_time_sec),mean(t21_jan$travel_time_sec))
+df_1_jan <- data.frame(x = Jan, y = travel_time_jan)
+ggplot(data = df_1_jan, mapping = aes(x = travel_time_jan, y = Jan)) + geom_bar(stat="identity",fill="lightblue")+ggtitle("From Start to Finish")
+```
+
+# Feb
+```{r}
+Travel_feb <- dplyr::filter(TRAVEL2022 ,service_date==	"2022-02-15"|service_date==	"2022-02-16"|service_date==	"2022-02-17"|service_date==	"2022-02-18"|service_date==	"2022-02-19"|service_date==	"2022-02-20"|service_date==
+"2022-02-21")
+nTravel_feb <- dplyr::filter(Travel_feb,route_id=="Orange")
+```
+
+#1
+```{r}
+f15 <- dplyr::filter(nTravel_feb,service_date=="2022-02-15")
+f15_1 <- dplyr::filter(f15,direction_id==0)
+f15_2<- dplyr::filter(f15_1,to_stop_id==min(f15_1$to_stop_id))
+f15_3 <- dplyr::filter(f15_2,end_time_sec==min(f15_2$end_time_sec))
+f15_4<-dplyr::arrange(f15_3,travel_time_sec)
+f15 <- max(f15_4$travel_time_sec)
+
+f16 <- dplyr::filter(nTravel_feb,service_date=="2022-02-16")
+f16_1 <- dplyr::filter(f16,direction_id==0)
+f16_2<- dplyr::filter(f16_1,to_stop_id==min(f16_1$to_stop_id))
+f16_3 <- dplyr::filter(f16_2,end_time_sec==min(f16_2$end_time_sec))
+f16_4<-dplyr::arrange(f16_3,travel_time_sec)
+f16 <- max(f16_4$travel_time_sec)
+
+f17 <- dplyr::filter(nTravel_feb,service_date=="2022-02-17")
+f17_1 <- dplyr::filter(f17,direction_id==0)
+f17_2<- dplyr::filter(f17_1,to_stop_id==min(f17_1$to_stop_id))
+f17_3 <- dplyr::filter(f17_2,end_time_sec==min(f17_2$end_time_sec))
+f17_4<-dplyr::arrange(f17_3,travel_time_sec)
+f17 <- max(f17_4$travel_time_sec)
+
+f18 <- dplyr::filter(nTravel_feb,service_date=="2022-02-18")
+f18_1 <- dplyr::filter(f18,direction_id==0)
+f18_2<- dplyr::filter(f18_1,to_stop_id==min(f18_1$to_stop_id))
+f18_3 <- dplyr::filter(f18_2,end_time_sec==min(f18_2$end_time_sec))
+f18_4<-dplyr::arrange(f18_3,travel_time_sec)
+f18 <- max(f18_4$travel_time_sec)
+
+f19<- dplyr::filter(nTravel_feb,service_date=="2022-02-19")
+f19_1 <- dplyr::filter(f19,direction_id==0)
+f19_2<- dplyr::filter(f19_1,to_stop_id==min(f19_1$to_stop_id))
+f19_3 <- dplyr::filter(f19_2,end_time_sec==min(f19_2$end_time_sec))
+f19_4<-dplyr::arrange(f19_3,travel_time_sec)
+f19 <- max(f19_4$travel_time_sec)
+
+f20 <- dplyr::filter(nTravel_feb,service_date=="2022-02-20")
+f20_1 <- dplyr::filter(f20,direction_id==0)
+f20_2<- dplyr::filter(f20_1,to_stop_id==min(f20_1$to_stop_id))
+f20_3 <- dplyr::filter(f20_2,end_time_sec==min(f20_2$end_time_sec))
+f20_4<-dplyr::arrange(f20_3,travel_time_sec)
+f20 <- max(f20_4$travel_time_sec)
+
+f21 <- dplyr::filter(nTravel_feb,service_date=="2022-02-21")
+f21_1 <- dplyr::filter(f21,direction_id==0)
+f21_2<- dplyr::filter(f21_1,to_stop_id==min(f21_1$to_stop_id))
+f21_3 <- dplyr::filter(f21_2,end_time_sec==min(f21_2$end_time_sec))
+f21_4<-dplyr::arrange(f21_3,travel_time_sec)
+f21 <- max(f21_4$travel_time_sec)
+
+```
+
+```{r}
+total_time_feb<- c(f15,f16,f17,f18,f19,f20,f21)
+Feb <- c("2-15","2-16","2-17","2-18","2-19","2-20","2-21")
+df_2_feb <- data.frame(x = Feb, y = total_time_feb)
+ggplot(data = df_2_feb, aes(x = Feb, y = total_time_feb )) + geom_line(aes(x,y,group=1),col="lightblue")+geom_point(aes(x,y),col="purple")
+```
+
+#3
+```{r}
+t_jan <- dplyr::filter(nTravel_jan,from_stop_id==min(nTravel_jan$from_stop_id)& to_stop_id==max(nTravel_jan$to_stop_id))
+t15_jan <- dplyr::filter(t_jan,service_date=="2022-01-15")
+t16_jan <- dplyr::filter(t_jan,service_date=="2022-01-16")
+t17_jan <- dplyr::filter(t_jan,service_date=="2022-01-17")
+t18_jan <- dplyr::filter(t_jan,service_date=="2022-01-18")
+t19_jan <- dplyr::filter(t_jan,service_date=="2022-01-19")
+t20_jan<- dplyr::filter(t_jan,service_date=="2022-01-20")
+t21_jan<- dplyr::filter(t_jan,service_date=="2022-01-21")
+travel_time_jan <- c(mean(t15_jan$travel_time_sec),mean(t16_jan$travel_time_sec),mean(t17_jan$travel_time_sec),mean(t18_jan$travel_time_sec),mean(t19_jan$travel_time_sec),mean(t20_jan$travel_time_sec),mean(t21_jan$travel_time_sec))
+df_1_jan <- data.frame(x = Jan, y = travel_time_jan)
+ggplot(data = df_1_jan, mapping = aes(x = travel_time_jan, y = Jan)) + geom_bar(stat="identity",fill="lightblue")+ggtitle("From Start to Finish")
+```
+
+# Mar
+
+```{r}
+Travel_mar <- dplyr::filter(TRAVEL2022 ,service_date==	"2022-03-15"|service_date==	"2022-03-16"|service_date==	"2022-03-17"|service_date==	"2022-03-18"|service_date==	"2022-03-19"|service_date==	"2022-03-20"|service_date==
+"2022-03-21")
+nTravel_mar <- dplyr::filter(Travel_mar,route_id=="Orange")
+```
+
+#1
+```{r}
+m15 <- dplyr::filter(nTravel_mar,service_date=="2022-03-15")
+m15_1 <- dplyr::filter(m15,direction_id==0)
+m15_2<- dplyr::filter(m15_1,to_stop_id==min(m15_1$to_stop_id))
+m15_3 <- dplyr::filter(m15_2,end_time_sec==min(m15_2$end_time_sec))
+m15_4<-dplyr::arrange(m15_3,travel_time_sec)
+m15 <- max(m15_4$travel_time_sec)
+
+m16 <- dplyr::filter(nTravel_mar,service_date=="2022-03-16")
+m16_1 <- dplyr::filter(m16,direction_id==0)
+m16_2<- dplyr::filter(m16_1,to_stop_id==min(m16_1$to_stop_id))
+m16_3 <- dplyr::filter(m16_2,end_time_sec==min(m16_2$end_time_sec))
+m16_4<-dplyr::arrange(m16_3,travel_time_sec)
+m16 <- max(m16_4$travel_time_sec)
+
+m17 <- dplyr::filter(nTravel_mar,service_date=="2022-03-17")
+m17_1 <- dplyr::filter(m17,direction_id==0)
+m17_2<- dplyr::filter(m17_1,to_stop_id==min(m17_1$to_stop_id))
+m17_3 <- dplyr::filter(m17_2,end_time_sec==min(m17_2$end_time_sec))
+m17_4<-dplyr::arrange(m17_3,travel_time_sec)
+m17 <- max(m17_4$travel_time_sec)
+
+m18 <- dplyr::filter(nTravel_mar,service_date=="2022-03-18")
+m18_1 <- dplyr::filter(m18,direction_id==0)
+m18_2<- dplyr::filter(m18_1,to_stop_id==min(m18_1$to_stop_id))
+m18_3 <- dplyr::filter(m18_2,end_time_sec==min(m18_2$end_time_sec))
+m18_4<-dplyr::arrange(m18_3,travel_time_sec)
+m18 <- max(m18_4$travel_time_sec)
+
+m19 <- dplyr::filter(nTravel_mar,service_date=="2022-03-19")
+m19_1 <- dplyr::filter(m19,direction_id==0)
+m19_2<- dplyr::filter(m19_1,to_stop_id==min(m19_1$to_stop_id))
+m19_3 <- dplyr::filter(m19_2,end_time_sec==min(m19_2$end_time_sec))
+m19_4<-dplyr::arrange(m19_3,travel_time_sec)
+m19 <- max(m19_4$travel_time_sec)
+
+m20 <- dplyr::filter(nTravel_mar,service_date=="2022-03-20")
+m20_1 <- dplyr::filter(m20,direction_id==0)
+m20_2<- dplyr::filter(m20_1,to_stop_id==min(m20_1$to_stop_id))
+m20_3 <- dplyr::filter(m20_2,end_time_sec==min(m20_2$end_time_sec))
+m20_4<-dplyr::arrange(m20_3,travel_time_sec)
+m20 <- max(m20_4$travel_time_sec)
+
+m21 <- dplyr::filter(nTravel_mar,service_date=="2022-03-21")
+m21_1 <- dplyr::filter(m21,direction_id==0)
+m21_2<- dplyr::filter(m21_1,to_stop_id==min(m21_1$to_stop_id))
+m21_3 <- dplyr::filter(m21_2,end_time_sec==min(m21_2$end_time_sec))
+m21_4<-dplyr::arrange(m21_3,travel_time_sec)
+m21 <- max(m21_4$travel_time_sec)
+```
+
+```{r}
+total_time_mar<- c(m15,m16,m17,m18,m19,m20,m21)
+Mar <- c("3-15","3-16","3-17","3-18","3-19","3-20","3-21")
+df_2_mar <- data.frame(x = Mar, y = total_time_mar)
+ggplot(data = df_2_mar, aes(x = Mar, y = total_time_mar )) + geom_line(aes(x,y,group=1),col="lightblue")+geom_point(aes(x,y),col="purple")
+```
+# April
+```{r}
+HRQ2 <- read.csv("D:/360Downloads/TravelTimes_2022/TravelTimes_2022/2022-Q2_HRTravelTimes.csv")
+```
+
+```{r}
+Travel_apr <- dplyr::filter(HRQ2 ,service_date==	"2022-04-15"|service_date==	"2022-04-16"|service_date==	"2022-04-17"|service_date==	"2022-04-18"|service_date==	"2022-04-19"|service_date==	"2022-04-20"|service_date==
+"2022-04-21")
+nTravel_apr <- dplyr::filter(Travel_apr,route_id=="Orange")
+```
+
+#1
+```{r}
+a15 <- dplyr::filter(nTravel_apr,service_date=="2022-04-15")
+a15_1 <- dplyr::filter(a15,direction_id==0)
+a15_2<- dplyr::filter(a15_1,to_stop_id==min(a15_1$to_stop_id))
+a15_3 <- dplyr::filter(a15_2,end_time_sec==min(a15_2$end_time_sec))
+a15_4<-dplyr::arrange(a15_3,travel_time_sec)
+a15 <- max(a15_4$travel_time_sec)
+
+a16 <- dplyr::filter(nTravel_apr,service_date=="2022-04-16")
+a16_1 <- dplyr::filter(a15,direction_id==0)
+a16_2<- dplyr::filter(a15_1,to_stop_id==min(a15_1$to_stop_id))
+a16_3 <- dplyr::filter(a15_2,end_time_sec==min(a15_2$end_time_sec))
+a16_4<-dplyr::arrange(a15_3,travel_time_sec)
+a16 <- max(a15_4$travel_time_sec)
 ```
 
