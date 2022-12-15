@@ -21,7 +21,7 @@ TRAVEL <- read.csv("D:/360Downloads/Travel_Times_2021/HRTravelTimesQ4_21.csv")
 
 # November 2021
 ```{r}
-Travel <- dplyr::filter(TRAVEL,service_date==	"2021-11-14"|service_date==	"2021-11-15"|service_date==	"2021-11-16"|service_date==	"2021-11-17"|service_date==	"2021-11-18"|service_date==	"2021-11-19"|service_date==	"2021-11-20"|service_date==
+Travel <- dplyr::filter(TRAVEL,service_date==	"2021-11-15"|service_date==	"2021-11-16"|service_date==	"2021-11-17"|service_date==	"2021-11-18"|service_date==	"2021-11-19"|service_date==	"2021-11-20"|service_date==
 "2021-11-21")
 nTravel <- dplyr::filter(Travel,route_id=="Orange")
 ```
@@ -100,28 +100,6 @@ d19 <- diff(m19_4$travel_time_sec)
 d20 <- diff(m20_4$travel_time_sec)
 d21 <- diff(m21_4$travel_time_sec)
 ```
-
-```{r}
-date <- c("11-15","11-16","11-17","11-18","11-19","11-20","11-21")
-diff <- data.frame(d15,d16,d17,d18,d19,d20,d21)
-ggplot()+geom_line(data = diff,aes(y = diff$d15,colour = "d15"),size=1)+
-  geom_point(data =  diff,aes(y = diff$d15,colour = "d15"),size=3)+
-  geom_line(data =  diff,aes(y = diff$d16,colour = "d16"),size=1) + 
-  geom_point(data =  diff,aes(y = diff$d16,colour = "d16"),size=3)+
-  geom_line(data =  diff,aes(y = diff$d17,colour = "d17"),size=1) + 
-  geom_point(data =  diff,aes(y = diff$d17,colour = "d17"),size=3)+
-  geom_line(data =  diff,aes(y = diff$d18,colour = "d18"),size=1) + 
-  geom_point(data =  diff,aes(y = diff$d18,colour = "d18"),size=3)+
-  geom_line(data =  diff,aes(y = diff$d19,colour = "d19"),size=1) + 
-  geom_point(data =  diff,aes(y = diff$d19,colour = "d19"),size=3)+
-  geom_line(data =  diff,aes(y = diff$d20,colour = "d20"),size=1) + 
-  geom_point(data =  diff,aes(y = diff$d20,colour = "d20"),size=3)+
-  geom_line(data =  diff,aes(y = diff$d21,colour = "d21"),size=1) + 
-  geom_point(data =  diff,aes(y = diff$d21,colour = "d21"),size=3)
-  scale_colour_manual("",values = c("d15" = "red","d16" = "green","d17"="yellow","d18"="pink","d19"="black","d20"="orange","d21"="blue"),)
-```
-
-
 
 ##3 Mean of total time that runs the full distance
 
@@ -221,13 +199,7 @@ di21 <- diff(d21_4$travel_time_sec)
 #3
 ```{r}
 t_dec <- dplyr::filter(nTravel_dec,from_stop_id==min(nTravel_dec$from_stop_id)& to_stop_id==max(nTravel_dec$to_stop_id))
-t15_dec <- dplyr::filter(t_dec,service_date=="2021-12-15")
-t16_dec <- dplyr::filter(t_dec,service_date=="2021-12-16")
-t17_dec <- dplyr::filter(t_dec,service_date=="2021-12-17")
-t18_dec <- dplyr::filter(t_dec,service_date=="2021-12-18")
-t19_dec <- dplyr::filter(t_dec,service_date=="2021-12-19")
-t20_dec<- dplyr::filter(t_dec,service_date=="2021-12-20")
-t21_dec<- dplyr::filter(t_dec,service_date=="2021-12-21")
+
 travel_time_dec <- c(mean(t15_dec$travel_time_sec),mean(t16_dec$travel_time_sec),mean(t17_dec$travel_time_sec),mean(t18_dec$travel_time_sec),mean(t19_dec$travel_time_sec),mean(t20_dec$travel_time_sec),mean(t21_dec$travel_time_sec))
 Dec <- c("12-15","12-16","12-17","12-18","12-19","12-20","12-21")
 df_1_dec <- data.frame(x = Dec, y = travel_time_dec)
@@ -394,20 +366,6 @@ df_2_feb <- data.frame(x = Feb, y = total_time_feb)
 ggplot(data = df_2_feb, aes(x = Feb, y = total_time_feb )) + geom_line(aes(x,y,group=1),col="lightblue")+geom_point(aes(x,y),col="purple")
 ```
 
-#3
-```{r}
-t_jan <- dplyr::filter(nTravel_jan,from_stop_id==min(nTravel_jan$from_stop_id)& to_stop_id==max(nTravel_jan$to_stop_id))
-t15_jan <- dplyr::filter(t_jan,service_date=="2022-01-15")
-t16_jan <- dplyr::filter(t_jan,service_date=="2022-01-16")
-t17_jan <- dplyr::filter(t_jan,service_date=="2022-01-17")
-t18_jan <- dplyr::filter(t_jan,service_date=="2022-01-18")
-t19_jan <- dplyr::filter(t_jan,service_date=="2022-01-19")
-t20_jan<- dplyr::filter(t_jan,service_date=="2022-01-20")
-t21_jan<- dplyr::filter(t_jan,service_date=="2022-01-21")
-travel_time_jan <- c(mean(t15_jan$travel_time_sec),mean(t16_jan$travel_time_sec),mean(t17_jan$travel_time_sec),mean(t18_jan$travel_time_sec),mean(t19_jan$travel_time_sec),mean(t20_jan$travel_time_sec),mean(t21_jan$travel_time_sec))
-df_1_jan <- data.frame(x = Jan, y = travel_time_jan)
-ggplot(data = df_1_jan, mapping = aes(x = travel_time_jan, y = Jan)) + geom_bar(stat="identity",fill="lightblue")+ggtitle("From Start to Finish")
-```
 
 # Mar
 
@@ -873,5 +831,103 @@ total_time_sep<- c(s15,s16,s17,s18,s19,s20,s21)
 September <- c("9-15","9-16","9-17","9-18","9-19","9-20","9-21")
 df_2_sep <- data.frame(x = September, y = total_time_sep)
 ggplot(data = df_2_sep, aes(x = September, y = total_time_sep )) + geom_line(aes(x,y,group=1),col="lightblue")+geom_point(aes(x,y),col="purple")
+```
+
+# Aggragate
+## The mean time of all trains runs the full
+```{r}
+t11 <- dplyr::filter(nTravel,from_stop_id==min(nTravel$from_stop_id)& to_stop_id==max(nTravel$to_stop_id))
+t12 <- dplyr::filter(nTravel_dec,from_stop_id==min(nTravel_dec$from_stop_id)& to_stop_id==max(nTravel_dec$to_stop_id))
+t1 <- dplyr::filter(nTravel_jan,from_stop_id==min(nTravel_jan$from_stop_id)& to_stop_id==max(nTravel_jan$to_stop_id))
+t2 <- dplyr::filter(nTravel_feb,from_stop_id==min(nTravel_feb$from_stop_id)& to_stop_id==max(nTravel_feb$to_stop_id))
+t3 <- dplyr::filter(nTravel_mar,from_stop_id==min(nTravel_mar$from_stop_id)& to_stop_id==max(nTravel_mar$to_stop_id))
+t4 <- dplyr::filter(nTravel_apr,from_stop_id==min(nTravel_apr$from_stop_id)& to_stop_id==max(nTravel_apr$to_stop_id))
+t5 <- dplyr::filter(nTravel_may,from_stop_id==min(nTravel_may$from_stop_id)& to_stop_id==max(nTravel_may$to_stop_id))
+t6 <- dplyr::filter(nTravel_jun,from_stop_id==min(nTravel_jun$from_stop_id)& to_stop_id==max(nTravel_jun$to_stop_id))
+t7 <- dplyr::filter(nTravel_jul,from_stop_id==min(nTravel_jul$from_stop_id)& to_stop_id==max(nTravel_jul$to_stop_id))
+t8 <- dplyr::filter(nTravel_aug,from_stop_id==min(nTravel_aug$from_stop_id)& to_stop_id==max(nTravel_aug$to_stop_id))
+t9 <- dplyr::filter(nTravel_sep,from_stop_id==min(nTravel_sep$from_stop_id)& to_stop_id==max(nTravel_sep$to_stop_id))
+
+meantime <- c(mean(t11$travel_time_sec),mean(t12$travel_time_sec),mean(t1$travel_time_sec),mean(t2$travel_time_sec),mean(t3$travel_time_sec),mean(t4$travel_time_sec),mean(t5$travel_time_sec),mean(t6$travel_time_sec),mean(t7$travel_time_sec),mean(t8$travel_time_sec),mean(t9$travel_time_sec))
+DAY <- c("Nov-2021","Dec-2021","Jan-2022","Feb-2022","Mar-2022","Apr-2022","May-2022","Jun-2022","Jul-2022","Aug-2022","Sep-2022")
+DF1 <- data.frame(x = DAY, y = meantime )
+ggplot(data = DF1, mapping = aes(x =meantime, y = DAY)) + geom_bar(stat="identity",fill="lightblue")+ggtitle("From Start to Finish")
+
+```
+## The mean time of runing each station
+
+```{r}
+B11 <- dplyr::filter(nTravel,direction_id==0&to_stop_id==min(b$to_stop_id))
+b70002 <- dplyr::filter(B11,B11$from_stop_id=="70002")
+m70002 <- mean(b70002$travel_time_sec)
+```
+
+```{r}
+AggreDate <- rbind(nTravel,nTravel_dec,nTravel_jan,nTravel_feb,nTravel_mar,nTravel_apr,nTravel_may,nTravel_jun,nTravel_jul,nTravel_aug,nTravel_sep)
+```
+
+```{r}
+Or <- dplyr::filter(AggreDate,direction_id==0&to_stop_id==min(AggreDate$to_stop_id))
+or70002 <- dplyr::filter(Or,Or$from_stop_id=="70002")
+orange70002 <- mean(or70002$travel_time_sec)
+
+
+or70004 <- dplyr::filter(Or,Or$from_stop_id=="70004")
+orange70004 <- mean(or70004$travel_time_sec)
+
+or70006 <- dplyr::filter(Or,Or$from_stop_id=="70006")
+orange70006 <- mean(or70006$travel_time_sec)
+
+or70008 <- dplyr::filter(Or,Or$from_stop_id=="70008")
+orange70008 <- mean(or70008$travel_time_sec)
+
+or70010 <- dplyr::filter(Or,Or$from_stop_id=="70010")
+orange70010 <- mean(or70010$travel_time_sec)
+
+or70012 <- dplyr::filter(Or,Or$from_stop_id=="70012")
+orange70012 <- mean(or70012$travel_time_sec)
+
+
+or70014 <- dplyr::filter(Or,Or$from_stop_id=="70014")
+orange70014 <- mean(or70014$travel_time_sec)
+or70016 <- dplyr::filter(Or,Or$from_stop_id=="70016")
+orange70016 <- mean(or70016$travel_time_sec)
+
+or70018 <- dplyr::filter(Or,Or$from_stop_id=="70018")
+orange70018 <- mean(or70018$travel_time_sec)
+
+or70020 <- dplyr::filter(Or,Or$from_stop_id=="70020")
+orange70020 <- mean(or70020$travel_time_sec)
+
+or70022 <- dplyr::filter(Or,Or$from_stop_id=="70022")
+orange70022 <- mean(or70022$travel_time_sec)
+
+
+or70024 <- dplyr::filter(Or,Or$from_stop_id=="70024")
+orange70024 <- mean(or70024$travel_time_sec)
+
+or70026 <- dplyr::filter(Or,Or$from_stop_id=="70026")
+orange70026 <- mean(or70026$travel_time_sec)
+
+or70028 <- dplyr::filter(Or,Or$from_stop_id=="70028")
+orange70028 <- mean(or70028$travel_time_sec)
+
+or70030 <- dplyr::filter(Or,Or$from_stop_id=="70030")
+orange70030 <- mean(or70030$travel_time_sec)
+
+
+or70032 <- dplyr::filter(Or,Or$from_stop_id=="70032")
+orange70032 <- mean(or70032$travel_time_sec)
+
+
+or70034 <- dplyr::filter(Or,Or$from_stop_id=="70034")
+orange70034 <- mean(or70034$travel_time_sec)
+
+or70036 <- dplyr::filter(Or,Or$from_stop_id=="70036")
+orange70036 <- mean(or70036$travel_time_sec)
+or70278 <- dplyr::filter(Or,Or$from_stop_id=="70278")
+orange70278 <- mean(or70278$travel_time_sec)
+or70279 <- dplyr::filter(Or,Or$from_stop_id=="70279")
+orange70279 <- mean(or70279$travel_time_sec)
 ```
 
