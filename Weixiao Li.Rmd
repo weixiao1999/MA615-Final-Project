@@ -849,9 +849,9 @@ t8 <- dplyr::filter(nTravel_aug,from_stop_id==min(nTravel_aug$from_stop_id)& to_
 t9 <- dplyr::filter(nTravel_sep,from_stop_id==min(nTravel_sep$from_stop_id)& to_stop_id==max(nTravel_sep$to_stop_id))
 
 meantime <- c(mean(t11$travel_time_sec),mean(t12$travel_time_sec),mean(t1$travel_time_sec),mean(t2$travel_time_sec),mean(t3$travel_time_sec),mean(t4$travel_time_sec),mean(t5$travel_time_sec),mean(t6$travel_time_sec),mean(t7$travel_time_sec),mean(t8$travel_time_sec),mean(t9$travel_time_sec))
-DAY <- c("Nov-2021","Dec-2021","Jan-2022","Feb-2022","Mar-2022","Apr-2022","May-2022","Jun-2022","Jul-2022","Aug-2022","Sep-2022")
+DAY <- c("Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep")
 DF1 <- data.frame(x = DAY, y = meantime )
-ggplot(data = DF1, mapping = aes(x =meantime, y = DAY)) + geom_bar(stat="identity",fill="lightblue")+ggtitle("From Start to Finish")
+ggplot(data = DF1, mapping = aes(x =Day,y = DF1)) + geom_line(aes(x,y,group=1),col="lightblue")+geom_point(aes(x,y),col="purple")+ggtitle("From Start to Finish")
 
 ```
 ## The mean time of runing each station
@@ -868,66 +868,55 @@ AggreDate <- rbind(nTravel,nTravel_dec,nTravel_jan,nTravel_feb,nTravel_mar,nTrav
 
 ```{r}
 Or <- dplyr::filter(AggreDate,direction_id==0&to_stop_id==min(AggreDate$to_stop_id))
+
 or70002 <- dplyr::filter(Or,Or$from_stop_id=="70002")
 orange70002 <- mean(or70002$travel_time_sec)
-
-
 or70004 <- dplyr::filter(Or,Or$from_stop_id=="70004")
 orange70004 <- mean(or70004$travel_time_sec)
-
 or70006 <- dplyr::filter(Or,Or$from_stop_id=="70006")
 orange70006 <- mean(or70006$travel_time_sec)
-
 or70008 <- dplyr::filter(Or,Or$from_stop_id=="70008")
 orange70008 <- mean(or70008$travel_time_sec)
-
 or70010 <- dplyr::filter(Or,Or$from_stop_id=="70010")
 orange70010 <- mean(or70010$travel_time_sec)
-
 or70012 <- dplyr::filter(Or,Or$from_stop_id=="70012")
 orange70012 <- mean(or70012$travel_time_sec)
-
-
 or70014 <- dplyr::filter(Or,Or$from_stop_id=="70014")
 orange70014 <- mean(or70014$travel_time_sec)
 or70016 <- dplyr::filter(Or,Or$from_stop_id=="70016")
 orange70016 <- mean(or70016$travel_time_sec)
-
 or70018 <- dplyr::filter(Or,Or$from_stop_id=="70018")
 orange70018 <- mean(or70018$travel_time_sec)
-
 or70020 <- dplyr::filter(Or,Or$from_stop_id=="70020")
 orange70020 <- mean(or70020$travel_time_sec)
-
 or70022 <- dplyr::filter(Or,Or$from_stop_id=="70022")
 orange70022 <- mean(or70022$travel_time_sec)
-
-
 or70024 <- dplyr::filter(Or,Or$from_stop_id=="70024")
 orange70024 <- mean(or70024$travel_time_sec)
-
 or70026 <- dplyr::filter(Or,Or$from_stop_id=="70026")
 orange70026 <- mean(or70026$travel_time_sec)
-
 or70028 <- dplyr::filter(Or,Or$from_stop_id=="70028")
 orange70028 <- mean(or70028$travel_time_sec)
-
 or70030 <- dplyr::filter(Or,Or$from_stop_id=="70030")
 orange70030 <- mean(or70030$travel_time_sec)
-
-
 or70032 <- dplyr::filter(Or,Or$from_stop_id=="70032")
 orange70032 <- mean(or70032$travel_time_sec)
-
-
 or70034 <- dplyr::filter(Or,Or$from_stop_id=="70034")
 orange70034 <- mean(or70034$travel_time_sec)
-
 or70036 <- dplyr::filter(Or,Or$from_stop_id=="70036")
 orange70036 <- mean(or70036$travel_time_sec)
 or70278 <- dplyr::filter(Or,Or$from_stop_id=="70278")
 orange70278 <- mean(or70278$travel_time_sec)
-or70279 <- dplyr::filter(Or,Or$from_stop_id=="70279")
-orange70279 <- mean(or70279$travel_time_sec)
+
+```
+
+
+# Between each stop and the average of 70001
+```{r}
+orange<- c(orange70002,orange70004,orange70006,orange70008,orange70010,orange70012,orange70014,orange70016,orange70018,orange70020,orange70022,orange70024,orange70026,orange70028,orange70030,orange70032,orange70034,orange70036,orange70278)
+orange_data <- c("02","04","06","08","10","12","14","16","18","20","22","24","26","28","30","32","34","36","278")
+df_4 <- data.frame(x=orange_data,y=orange)
+
+ggplot(data = df_4, mapping = aes(x =orange_data, y = orange)) + geom_bar(stat="identity",fill="lightblue")
 ```
 
