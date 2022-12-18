@@ -1,1 +1,3 @@
 # MA615-Final-Project
+EDA：In the EDA process, I picked fiftheens-nineteen from each month as the data, and then I analyzed the earliest train in one day on the Orange Line that runs the full distance of each month. Then I aggregate every month data and take average of them to find the travel time of all train runs the full distance.I learned how to clean and deal with big dataset and analyze them. I am more familar with data visualization
+Shiny: For orange line, I choose to find the time of each station to "70001";For bus, I choose to find the time of each station to "110".  But for I cannot upload a big dateset to my Github, so I can't create a shiny link. But you can run my shiny app with r studio.
